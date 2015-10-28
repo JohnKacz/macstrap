@@ -41,8 +41,8 @@ main() {
         update
         exit
         ;;
-      "update macstrap" )
-        update macstrap
+      "upgrade" )
+        upgrade
         exit
         ;;
       backup )
@@ -79,7 +79,7 @@ usage() {
     reload                  Reload the .bash_profile
     boot                    Bootstrap OS X and install all configured apps, binaries etc.
     update                  Update all apps, binaries etc. and all OS X app store applications
-    update macstrap         Update macstrap to the latest version
+    upgrade                 Update macstrap to the latest version
     backup                  Backup the app configurations with mackup
     restore                 Restore the app configurations with mackup
 
@@ -88,20 +88,14 @@ EOF
 
 # update OS X or macstrap
 update() {
-  if [ $# -eq 0 ]; then
-    # if no argument is present update the apps, binaries and OS X app store applications
-    echo "Updating all apps, binaries etc. and the OS X app store applications ..."
-    sh "$os/osx/update.sh"
-  else
-    if [ $1 = "macstrap" ]; then
-      echo "Updating macstrap ..."
-      updatemacstrap
-    fi
-  fi
+  echo "Updating all apps, binaries etc. and the OS X app store applications ..."
+  sh "$os/osx/update.sh"
 }
 
 # update macstrap via git
-updatemacstrap() {
+upgrade() {
+  # TODO - Don't update macstrap if version is current
+  echo "Updating macstrap ..."
   mkdir -p /tmp/macstrap \
     && cd /tmp/macstrap \
     && curl -L https://github.com/johnkacz/macstrap/archive/master.tar.gz | tar zx --strip 1 \
