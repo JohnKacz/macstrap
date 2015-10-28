@@ -104,7 +104,7 @@ update() {
 updatemacstrap() {
   mkdir -p /tmp/macstrap \
     && cd /tmp/macstrap \
-    && curl -L https://github.com/guylabs/macstrap/archive/master.tar.gz | tar zx --strip 1 \
+    && curl -L https://github.com/johnkacz/macstrap/archive/master.tar.gz | tar zx --strip 1 \
     && ./install.sh \
     && echo "Updated macstrap to $(macstrap --version)"
   exit
