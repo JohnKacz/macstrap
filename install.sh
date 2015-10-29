@@ -44,7 +44,7 @@ if [ ! -e "$conf/macstrap.cfg" ]; then
 fi
 if [ ! -e "$conf/themes" ]; then
   mkdir -p "$conf/themes"
-  cp -rn "$lib/macstrap/conf/themes/*" "$conf/themes/"
+  cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
   echo -e "\t- Copied the skeleton macstrap themes to \033[1m$conf/themes\033[0m"
 fi
 if [ ! -e "$HOME/.mackup.cfg" ]; then
