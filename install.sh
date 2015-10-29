@@ -65,6 +65,8 @@ echo -e "\t- Removed installation files"
 echo -e "Finished installing macstrap. Checking if homebrew, cask and mackup are installed and up to date ..."
 echo
 
+cd ~/
+
 # Check for homebrew
 if test ! $(which brew); then
   echo "Installing homebrew ..."
