@@ -63,7 +63,7 @@ main() {
 
 # usage info
 usage() {
-  source banner.sh
+  source /usr/local/lib/macstrap/banner.sh
 
   cat <<EOF
 
