@@ -15,21 +15,21 @@ conf="$HOME/.macstrap"
 confMackup="$HOME/.mackup"
 
 # Create directories in case they aren't already there
-mkdir -p $lib
-mkdir -p $bin
+sudo mkdir -p $lib
+sudo mkdir -p $bin
 
 # Remove existing macstrap if it exists
 if [ -d "$lib/${PWD##*/}" ]; then
-  rm -rf "$lib/${PWD##*/}"
+  sudo rm -rf "$lib/${PWD##*/}"
 fi
 
 # Copy the macstrap to the lib folder
-cp -R $dirname "$lib/"
+sudo cp -R $dirname "$lib/"
 echo -e "\t- Copied \033[1m${dirname}\033[0m to \033[1m${lib}\033[0m"
 
 # Remove existing bin if it exists
 if [ -L "$bin/macstrap" ]; then
-  rm -f "$bin/macstrap"
+  sudo rm -f "$bin/macstrap"
 fi
 
 # Symlink macstrap
@@ -38,27 +38,27 @@ echo -e "\t- Symlinked \033[1m${bin}/macstrap\033[0m to \033[1m${lib}/macstrap/m
 
 # Copy the skeleton configuration files to config directory
 if [ ! -e "$conf/macstrap.cfg" ]; then
-  mkdir -p $conf
-  cp -rn "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
+  sudo mkdir -p $conf
+  sudo cp -rn "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
   echo -e "\t- Copied the skeleton macstrap configuration to \033[1m$conf/macstrap.cfg\033[0m"
 fi
 if [ ! -e "$conf/themes" ]; then
-  mkdir -p "$conf/themes"
-  cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
+  sudo mkdir -p "$conf/themes"
+  sudo cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
   echo -e "\t- Copied the skeleton macstrap themes to \033[1m$conf/themes\033[0m"
 fi
 if [ ! -e "$HOME/.mackup.cfg" ]; then
-  cp -rn "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
+  sudo cp -rn "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
   echo -e "\t- Copied the skeleton mackup configuration to \033[1m$HOME/.mackup.cfg\033[0m"
 fi
 if [ ! -d "$HOME/.mackup" ]; then
-  cp -rn "$lib/macstrap/conf/.mackup" $confMackup
+  sudo cp -rn "$lib/macstrap/conf/.mackup" $confMackup
   echo -e "\t- Copied the additional mackup configurations to \033[1m${confMackup}}\033[0m"
 fi
 
 # if macstrap was installed with the base installation, then delete the extracted /tmp/macstrap folder again
 if [ -e "/tmp/macstrap" ]; then
-  rm -rf "/tmp/macstrap"
+  sudo rm -rf "/tmp/macstrap"
 fi
 
 echo -e "\t- Removed installation files"
