@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eu
-source version.sh
+source /usr/local/lib/version.sh
 
 # macstrap main
 main() {

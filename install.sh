@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eu
-source /usr/local/lib/version.sh
+source version.sh
 
 # Echo banner
 source banner.sh
