@@ -2,6 +2,10 @@
 # General configuration #
 #########################
 
+### MOTD Script ### 
+# Doing this first so I can read the motd while everything else gets loaded
+if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
+
 # Export PATH
 export PATH=/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 
@@ -11,23 +15,23 @@ export PATH=/usr/local/opt/ruby/bin:$PATH
 # Use gnu tools instead
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
-# Setup jEnv
-export PATH=$HOME/.jenv/bin:$PATH
-eval "$(jenv init -)"
-jenv add `/usr/libexec/java_home`
+# Setup rbenv and pyenv
+export RBENV_ROOT=/usr/local/var/rbenv
+eval "$(rbenv init -)"
+eval "$(pyenv init -)"
 
-# Use atom as default editor
-EDITOR="atom"
-
-# Add gradle properties
-export GRADLE_OPTS="-Xmx2048m -Xms256m -XX:MaxPermSize=512m"
-
-# Update the number of open files
-ulimit -n 1000
+# Use Sublime Text as default editor
+EDITOR="subl"
 
 # Add bash completion (for git and others)
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
+fi
+
+# Lunchy tab completion
+LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
+if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then
+  . $LUNCHY_DIR/lunchy-completion.bash
 fi
 
 ###########
@@ -35,26 +39,32 @@ fi
 ###########
 
 # Color ls
-alias ls='pwd; ls --color=auto -ahF'
+# alias ls='pwd; ls --color=auto -ahF'
 
 # Display as a list
-alias ll='pwd; ls -1ah'
+# alias ll='pwd; ls -1ah'
 
 # Display the insides of a particular directory
-alias lv='pwd; ls -R'
+# alias lv='pwd; ls -R'
+
+alias work='cd ~/code/work/;pwd;ls;'
+
+# alias psql=/usr/local/opt/postgresql/bin/psql
 
 ###########################
 # Oh-my-zsh configuration #
 ###########################
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/guy/.oh-my-zsh
+export ZSH=/Users/johnkacz/.oh-my-zsh
 
 # The ZSH theme to use
 ZSH_THEME="agnoster"
 
 # The plugins to use in the zsh shell
-plugins=(atom git gradle mvn npm bower brew)
+# plugins=(atom git gradle mvn npm bower brew)
 
 # Load the oh-my-zsh configuraiton file
 source $ZSH/oh-my-zsh.sh
+
+eval "$(docker-machine env dev)"
