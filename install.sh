@@ -33,7 +33,7 @@ if [ -L "$bin/macstrap" ]; then
 fi
 
 # Symlink macstrap
-ln -s "$lib/macstrap/macstrap.sh" "$bin/macstrap"
+sudo ln -s "$lib/macstrap/macstrap.sh" "$bin/macstrap"
 echo -e "\t- Symlinked \033[1m${bin}/macstrap\033[0m to \033[1m${lib}/macstrap/macstrap.sh\033[0m"
 
 # Copy the skeleton configuration files to config directory
