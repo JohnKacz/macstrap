@@ -14,22 +14,33 @@ source $config
 # Install the binaries
 brew install ${binaries[@]}
 
-echo "Installing global npm packages..."
 # Install the latest stable node version and the global npm packages
 # TODO - Check to see if nvm is installed first
+echo "Installing latest stable version of node..."
 nvm install stable
 nvm alias default stable
+echo "Installing global npm packages..."
 npm install -g ${globalNpmPackages[@]}
 
-echo "Installing latest version of ruby..."
 # Install the latest stable ruby version and the global ruby gems
 # TODO - Check to see if rbenv is installed first
+echo "Installing latest stable version of ruby..."
 rbenv init -
-rbenv install $(rbenv install -l | grep -v - | tail -1)
+latestRubyVersion=$(rbenv install -l | grep -v - | tail -1)
+rbenv install $latestRubyVersion
+rbenv global $latestRubyVersion
 echo "Updating RubyGems system software..."
 gem update --system
 echo "Installing default ruby gems..."
 gem install -g ${globalRubyGems[@]}
+
+echo "Installing latest stable version of python..."
+# Install the latest stable python version
+# TODO - Check to see if rbenv is installed first
+pyenv init -
+latestPythonVersion=$(pyenv install -l | grep -v - | grep -v b | tail -1)
+pyenv install $latestPythonVersion
+pyenv global $latestPythonVersion
 
 # Install oh-my-zsh
 echo "Installing oh-my-zsh..."
