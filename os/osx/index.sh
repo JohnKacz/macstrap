@@ -15,8 +15,11 @@ fi
 osx="$os/osx"
 
 # Run each program
+echo "Setting sensible defaults..."
 sh "$osx/defaults.sh"
+echo "Installing default binaries, npm packages and ruby gems..."
 sh "$osx/binaries.sh"
+echo "Installing default apps..."
 sh "$osx/apps.sh"
 
 # Symlink the .bash_profile configuration file
