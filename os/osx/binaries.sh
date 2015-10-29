@@ -14,23 +14,29 @@ source $config
 # Install the binaries
 brew install ${binaries[@]}
 
+echo "Installing global npm packages..."
 # Install the latest stable node version and the global npm packages
 # TODO - Check to see if nvm is installed first
 nvm install stable
 nvm alias default stable
 npm install -g ${globalNpmPackages[@]}
 
+echo "Installing latest version of ruby..."
 # Install the latest stable ruby version and the global ruby gems
 # TODO - Check to see if rbenv is installed first
 rbenv init -
 rbenv install $(rbenv install -l | grep -v - | tail -1)
+echo "Updating RubyGems system software..."
 gem update --system
+echo "Installing default ruby gems..."
 gem install -g ${globalRubyGems[@]}
 
 # Install oh-my-zsh
+echo "Installing oh-my-zsh..."
 curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
 
 # Remove outdated versions from the cellar
+echo "Cleaning up..."
 brew cleanup
 
 exit 0

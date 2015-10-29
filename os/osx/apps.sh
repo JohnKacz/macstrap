@@ -19,6 +19,7 @@ apm install ${atomPackages[@]}
 brew cask alfred link
 
 # Remove outdated versions from the cellar
+echo "Cleaning up..."
 brew cleanup
 brew cask cleanup
 
