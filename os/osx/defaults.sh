@@ -20,6 +20,21 @@ echo "This script will make your Mac awesome"
 ###############################################################################
 
 echo ""
+echo "Hiding the Time Machine, Volume, User, and Bluetooth icons"
+for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+  defaults write "${domain}" dontAutoLoad -array \
+    "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+    "/System/Library/CoreServices/Menu Extras/Volume.menu" \
+    "/System/Library/CoreServices/Menu Extras/User.menu"
+done
+
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
+echo ""
 echo "Disabling OS X Gate Keeper"
 echo "(You'll be able to install any app you want from here on, not just Mac App Store apps)"
 sudo spctl --master-disable
@@ -74,16 +89,16 @@ echo "Enabling full keyboard access for all controls (e.g. enable Tab in modal d
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 echo ""
-echo "Disabling press-and-hold for keys in favor of a key repeat"
+echo "Disabling press-and-hold for special keys in favor of a key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo ""
 echo "Setting a blazingly fast keyboard repeat rate (ain't nobody got time fo special chars while coding!)"
 defaults write NSGlobalDomain KeyRepeat -int 0
 
-echo ""
-echo "Disabling auto-correct"
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# echo ""
+# echo "Disabling auto-correct"
+# defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 echo ""
 echo "Setting trackpad & mouse speed to a reasonable number"
@@ -116,6 +131,10 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 ###############################################################################
 
 echo ""
+echo "Show icons for hard drives, servers, and removable media on the desktop"
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+echo ""
 echo "Showing all filename extensions in Finder by default"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
@@ -127,13 +146,13 @@ echo ""
 echo "Allowing text selection in Quick Look/Preview in Finder by default"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
-echo ""
-echo "Displaying full POSIX path as Finder window title"
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# echo ""
+# echo "Displaying full POSIX path as Finder window title"
+# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-echo ""
-echo "Disabling the warning when changing a file extension"
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# echo ""
+# echo "Disabling the warning when changing a file extension"
+# defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo ""
 echo "Use column view in all Finder windows by default"
@@ -149,9 +168,24 @@ echo "Enabling snap-to-grid for icons on the desktop and in other icon views"
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
+echo ""
+echo "Increasing grid spacing for icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+
+echo ""
+echo "Increasing the size of icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+
 ###############################################################################
 # Dock & Mission Control
 ###############################################################################
+
+echo "Wiping all (default) app icons from the Dock"
+defaults write com.apple.dock persistent-apps -array
 
 echo ""
 echo "Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate"
@@ -171,6 +205,12 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 ###############################################################################
 # Safari & WebKit
 ###############################################################################
+
+echo ""
+echo "Privacy: Don't send search queries to Apple"
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
 
 echo ""
 echo "Hiding Safari's bookmarks bar by default"
@@ -294,25 +334,28 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Messages                                                                    #
 ###############################################################################
 
-echo ""
-echo "Disable automatic emoji substitution (i.e. use plain text smileys)"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+# echo ""
+# echo "Disable automatic emoji substitution (i.e. use plain text smileys)"
+# defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 echo ""
 echo "Disable smart quotes as it's annoying for messages that contain code"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
-echo ""
-echo "Disable continuous spell checking"
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+# echo ""
+# echo "Disable continuous spell checking"
+# defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 ###############################################################################
 # Personal Additions
 ###############################################################################
 
 echo ""
-echo "Disable the sudden motion sensor as it's not useful for SSDs"
-sudo pmset -a sms 0
+echo "Disable the sudden motion sensor? (Not useful for SSDs) (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  sudo pmset -a sms 0
+fi
 
 echo ""
 echo "Speeding up wake from sleep to 24 hours from an hour"
@@ -326,11 +369,13 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 ###############################################################################
 # Kill affected applications
 ###############################################################################
-
+echo "Done. Note that some of these changes require a logout/restart to take effect."
+echo "Killing all affected applications once you are ready. (any input)"
+read -r response
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
 	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
 	"Transmission" "Twitter" "iCal"; do
 	killall "${app}" > /dev/null 2>&1
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+
