@@ -100,7 +100,8 @@ upgrade() {
     && cd /tmp/macstrap \
     && curl -L https://github.com/johnkacz/macstrap/archive/master.tar.gz | tar zx --strip 1 \
     && ./install.sh \
-    && echo "Updated macstrap to $(macstrap --version)"
+    && echo "Updated macstrap to $(macstrap --version)" \
+    && cd ~/
   exit
 }
 
