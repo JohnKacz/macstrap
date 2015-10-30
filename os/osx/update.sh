@@ -7,7 +7,8 @@ softwareupdate -ia
 
 # update brew and cask packages
 echo "Updating the apps and binaries ..."
-brew update && brew upgrade brew-cask
+brew update 
+brew upgrade brew-cask || true
 brew upgrade
 
 # update oh-my-zsh

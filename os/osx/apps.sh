@@ -2,7 +2,8 @@
 set -eu
 
 # Update homebrew and homebrew cask
-brew update && brew upgrade brew-cask
+brew update
+brew upgrade brew-cask || true
 
 # Load the apps/casks/atom packages from the config file
 source $config
