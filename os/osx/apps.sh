@@ -14,9 +14,9 @@ echo -e "Installing apps ..."
 brew cask install ${apps[@]}
 
 # Install atom packages
-echo ""
-echo "Installing atom packages ..."
-apm install ${atomPackages[@]}
+# echo ""
+# echo "Installing atom packages ..."
+# apm install ${atomPackages[@]}
 
 # Link with alfred
 brew cask alfred link
