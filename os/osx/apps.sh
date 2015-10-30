@@ -8,10 +8,12 @@ brew update && brew upgrade brew-cask
 source $config
 
 # Install apps
+echo ""
 echo -e "Installing apps ..."
 brew cask install ${apps[@]}
 
 # Install atom packages
+echo ""
 echo "Installing atom packages ..."
 apm install ${atomPackages[@]}
 
@@ -19,7 +21,10 @@ apm install ${atomPackages[@]}
 brew cask alfred link
 
 # Remove outdated versions from the cellar
+echo ""
+echo ""
 echo "Cleaning up..."
+echo ""
 brew cleanup
 brew cask cleanup
 
