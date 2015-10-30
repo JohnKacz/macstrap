@@ -36,7 +36,7 @@ latestRubyVersion=$(rbenv install -l | grep -v - | tail -1)
 rbenv install $latestRubyVersion
 rbenv global $latestRubyVersion
 echo "Installing default ruby gems..."
-gem install -g ${globalRubyGems[@]}
+sudo gem install ${globalRubyGems[@]}
 
 # Install the latest stable python version
 # TODO - Check to see if rbenv is installed first
@@ -46,6 +46,8 @@ pyenv init -
 latestPythonVersion=$(pyenv install -l | grep -v - | grep -v b | tail -1)
 pyenv install $latestPythonVersion
 pyenv global $latestPythonVersion
+echo "Installing default python packages..."
+pip install ${globalPythonPackages[@]} -U
 
 # Install oh-my-zsh
 echo ""
