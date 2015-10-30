@@ -35,8 +35,6 @@ rbenv init -
 latestRubyVersion=$(rbenv install -l | grep -v - | tail -1)
 rbenv install $latestRubyVersion
 rbenv global $latestRubyVersion
-echo "Updating RubyGems system software..."
-gem update --system
 echo "Installing default ruby gems..."
 gem install -g ${globalRubyGems[@]}
 
