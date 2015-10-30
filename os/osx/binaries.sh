@@ -36,7 +36,7 @@ latestRubyVersion=$(rbenv install -l | grep -v - | tail -1)
 rbenv install $latestRubyVersion
 rbenv global $latestRubyVersion
 echo "Installing default ruby gems..."
-sudo gem install ${globalRubyGems[@]}
+sudo gem install ${globalRubyGems[@]} -N
 
 # Install the latest stable python version
 # TODO - Check to see if rbenv is installed first
