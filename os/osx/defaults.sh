@@ -367,15 +367,11 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 ###############################################################################
 echo ""
 echo "Done. Note that some of these changes require a logout/restart to take effect."
-
-# NOTE - Killing Terminal while running the larger boot script stops the boot process.
-# echo "Killing all affected applications once you are ready. (any input)"
-# read -r response
-# for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-# 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
-# 	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
-# 	"Transmission" "Twitter" "iCal"; do
-# 	killall "${app}" > /dev/null 2>&1
-# done
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
+	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" \
+	"Transmission" "Twitter" "iCal"; do
+	killall "${app}" > /dev/null 2>&1
+done
 
 exit 0
