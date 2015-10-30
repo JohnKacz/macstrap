@@ -20,8 +20,10 @@ brew install ${binaries[@]}
 # TODO - Check to see if nvm is installed first
 echo ""
 echo "Installing latest stable version of node..."
-nvm install stable
-nvm alias default stable
+# TODO - upstream does not support managing nvm through homebrew.
+#      - modify this script to install it as recommended (https://github.com/creationix/nvm)
+# nvm install stable
+# nvm alias default stable
 echo "Installing global npm packages..."
 npm install -g ${globalNpmPackages[@]}
 
