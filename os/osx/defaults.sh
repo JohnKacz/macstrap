@@ -5,16 +5,11 @@ set -eu
 # OSX for Hackers (Mavericks/Yosemite)
 # Source: https://gist.github.com/brandonb927/3195465
 
-# Some things taken from here
-# https://github.com/mathiasbynens/dotfiles/blob/master/.osx
-
 # Ask for the administrator password upfront
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-echo "This script will make your Mac awesome"
 
 ###############################################################################
 # General UI/UX
@@ -171,15 +166,15 @@ echo "Enabling snap-to-grid for icons on the desktop and in other icon views"
 
 echo ""
 echo "Increasing grid spacing for icons on the desktop and in other icon views"
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-# /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 60" ~/Library/Preferences/com.apple.finder.plist
+# /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 60" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 60" ~/Library/Preferences/com.apple.finder.plist
 
 echo ""
 echo "Increasing the size of icons on the desktop and in other icon views"
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-# /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 24" ~/Library/Preferences/com.apple.finder.plist
+# /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 24" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 24" ~/Library/Preferences/com.apple.finder.plist
 
 ###############################################################################
 # Dock & Mission Control
@@ -264,50 +259,50 @@ echo "Disable Spotlight indexing for any volume that gets mounted and has not ye
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
-echo ""
-echo "Change indexing order and disable some search results"
-# Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
-# 	MENU_DEFINITION
-# 	MENU_CONVERSION
-# 	MENU_EXPRESSION
-# 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-# 	MENU_WEBSEARCH             (send search queries to Apple)
-# 	MENU_OTHER
-defaults write com.apple.spotlight orderedItems -array \
-	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-	'{"enabled" = 1;"name" = "PDF";}' \
-	'{"enabled" = 1;"name" = "FONTS";}' \
-	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
-	'{"enabled" = 0;"name" = "MESSAGES";}' \
-	'{"enabled" = 0;"name" = "CONTACT";}' \
-	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-	'{"enabled" = 0;"name" = "IMAGES";}' \
-	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-	'{"enabled" = 0;"name" = "MUSIC";}' \
-	'{"enabled" = 0;"name" = "MOVIES";}' \
-	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-	'{"enabled" = 0;"name" = "SOURCE";}' \
-	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
-	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+# echo ""
+# echo "Change indexing order and disable some search results"
+# # Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
+# # 	MENU_DEFINITION
+# # 	MENU_CONVERSION
+# # 	MENU_EXPRESSION
+# # 	MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
+# # 	MENU_WEBSEARCH             (send search queries to Apple)
+# # 	MENU_OTHER
+# defaults write com.apple.spotlight orderedItems -array \
+# 	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
+# 	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+# 	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
+# 	'{"enabled" = 1;"name" = "PDF";}' \
+# 	'{"enabled" = 1;"name" = "FONTS";}' \
+# 	'{"enabled" = 0;"name" = "DOCUMENTS";}' \
+# 	'{"enabled" = 0;"name" = "MESSAGES";}' \
+# 	'{"enabled" = 0;"name" = "CONTACT";}' \
+# 	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
+# 	'{"enabled" = 0;"name" = "IMAGES";}' \
+# 	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
+# 	'{"enabled" = 0;"name" = "MUSIC";}' \
+# 	'{"enabled" = 0;"name" = "MOVIES";}' \
+# 	'{"enabled" = 0;"name" = "PRESENTATIONS";}' \
+# 	'{"enabled" = 0;"name" = "SPREADSHEETS";}' \
+# 	'{"enabled" = 0;"name" = "SOURCE";}' \
+# 	'{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_OTHER";}' \
+# 	'{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
+# 	'{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
+# 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 
-echo ""
-echo "Load new settings before rebuilding the index"
-killall mds > /dev/null 2>&1
+# echo ""
+# echo "Load new settings before rebuilding the index"
+# killall mds > /dev/null 2>&1
 
-echo ""
-echo "Make sure indexing is enabled for the main volume"
-sudo mdutil -i on / > /dev/null
+# echo ""
+# echo "Make sure indexing is enabled for the main volume"
+# sudo mdutil -i on / > /dev/null
 
-echo ""
-echo "Rebuild the index from scratch"
-sudo mdutil -E / > /dev/null
+# echo ""
+# echo "Rebuild the index from scratch"
+# sudo mdutil -E / > /dev/null
 
 ###############################################################################
 # Terminal & iTerm 2
@@ -370,13 +365,17 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 ###############################################################################
 # Kill affected applications
 ###############################################################################
+echo ""
 echo "Done. Note that some of these changes require a logout/restart to take effect."
-echo "Killing all affected applications once you are ready. (any input)"
-read -r response
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
-	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
-	"Transmission" "Twitter" "iCal"; do
-	killall "${app}" > /dev/null 2>&1
-done
 
+# NOTE - Killing Terminal while running the larger boot script stops the boot process.
+# echo "Killing all affected applications once you are ready. (any input)"
+# read -r response
+# for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+# 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
+# 	"Opera" "Safari" "SizeUp" "Spectacle" "SystemUIServer" "Terminal" \
+# 	"Transmission" "Twitter" "iCal"; do
+# 	killall "${app}" > /dev/null 2>&1
+# done
+
+exit 0
