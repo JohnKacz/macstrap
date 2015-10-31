@@ -47,9 +47,8 @@ pyenv init -
 latestPythonVersion=$(pyenv install -l | grep -v -e '-\|a\|b' | tail -1)
 pyenv install $latestPythonVersion
 pyenv global $latestPythonVersion
-sudo easy_install pip
-echo "Installing default python packages..."
-pip install ${globalPythonPackages[@]} -U
+# echo "Installing default python packages..."
+# pip install ${globalPythonPackages[@]} -U || true
 
 # Install oh-my-zsh
 echo ""
