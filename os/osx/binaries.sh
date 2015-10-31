@@ -22,8 +22,10 @@ echo ""
 echo "Installing latest stable version of node..."
 # TODO - upstream does not support managing nvm through homebrew.
 #      - modify this script to install it as recommended (https://github.com/creationix/nvm)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh)"
 # nvm install stable
 # nvm alias default stable
+
 echo "Installing global npm packages..."
 npm install -g ${globalNpmPackages[@]}
 
@@ -35,24 +37,27 @@ rbenv init -
 latestRubyVersion=$(rbenv install -l | grep -v - | tail -1)
 rbenv install $latestRubyVersion
 rbenv global $latestRubyVersion
+rbenv rehash
 echo "Installing default ruby gems..."
 sudo gem install ${globalRubyGems[@]} -N
+rbenv rehash
 
 # Install the latest stable python version
 # TODO - Check to see if rbenv is installed first
 echo ""
 echo "Installing latest stable version of python..."
 pyenv init -
-latestPythonVersion=$(pyenv install -l | grep -v - | grep -v b | tail -1)
+latestPythonVersion=$(pyenv install -l | grep -v -e '-\|a\|b' | tail -1)
 pyenv install $latestPythonVersion
 pyenv global $latestPythonVersion
+sudo easy_install pip
 echo "Installing default python packages..."
 pip install ${globalPythonPackages[@]} -U
 
 # Install oh-my-zsh
 echo ""
 echo "Installing oh-my-zsh..."
-curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Remove outdated versions from the cellar
 echo ""

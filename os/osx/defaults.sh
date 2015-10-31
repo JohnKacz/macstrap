@@ -373,5 +373,7 @@ echo "Done. Note that some of these changes require a logout/restart to take eff
 # 	"Transmission" "Twitter" "iCal"; do
 # 	killall "${app}" > /dev/null 2>&1
 # done
+killall Dock
+killall Finder
 
 exit 0
