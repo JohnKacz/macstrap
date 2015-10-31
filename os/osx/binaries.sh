@@ -23,8 +23,8 @@ echo "Installing latest stable version of node..."
 # TODO - upstream does not support managing nvm through homebrew.
 #      - modify this script to install it as recommended (https://github.com/creationix/nvm)
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh)"
-# nvm install stable
-# nvm alias default stable
+nvm install stable
+nvm alias default stable
 
 echo "Installing global npm packages..."
 npm install -g ${globalNpmPackages[@]}
