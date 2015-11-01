@@ -16,14 +16,23 @@ osx="$os/osx"
 
 # Run each program
 echo ""
-echo "Setting sensible defaults..."
-sh "$osx/defaults.sh"
+echo "Would you like to set some system defaults? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  sh "$osx/defaults.sh"
+fi
 echo ""
-echo "Installing default binaries, npm packages and ruby gems..."
-sh "$osx/binaries.sh"
+echo "Would you like to install default binaries, npm packages and ruby gems? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  sh "$osx/binaries.sh"
+fi
 echo ""
-echo "Installing default apps..."
-sh "$osx/apps.sh"
+echo "Would you like to install default applications? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  sh "$osx/apps.sh"
+fi
 
 # Symlink the .bash_profile configuration file
 if [[ ! -e "$HOME/.bash_profile" ]]; then
