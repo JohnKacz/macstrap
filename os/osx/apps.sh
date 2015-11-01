@@ -18,9 +18,6 @@ brew cask install ${apps[@]}
 # echo "Installing atom packages ..."
 # apm install ${atomPackages[@]}
 
-# Link with alfred
-brew cask alfred link
-
 # Remove outdated versions from the cellar
 echo ""
 echo ""
