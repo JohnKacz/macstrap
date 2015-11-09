@@ -35,21 +35,12 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 fi
 
 # Symlink the .bash_profile configuration file
-if [[ ! -e "$HOME/.bash_profile" ]]; then
-  ln -s "$osx/profile.sh" "$HOME/.bash_profile"
-  echo -e "Symlinked \033[1m$osx/profile.sh\033[0m => \033[1m$HOME/.bash_profile\033[0m"
-  source $HOME/.bash_profile
+if [[ ! -e "$HOME/.profile" ]]; then
+  ln -s "$osx/profile.sh" "$HOME/.profile"
+  echo -e "Symlinked \033[1m$osx/profile.sh\033[0m => \033[1m$HOME/.profile\033[0m"
+  source $HOME/.profile
 else
-  echo -e "\033[1m$HOME/.bash_profile\033[0m already exists. Please remove it and bootstrap again."
-fi
-
-# Symlink the .zshrc configuration file
-if [[ ! -e "$HOME/.zshrc" ]]; then
-  ln -s "$osx/profile.sh" "$HOME/.zshrc"
-  echo -e "Symlinked \033[1m$osx/profile.sh\033[0m => \033[1m$HOME/.zshrc\033[0m"
-  source $HOME/.zshrc
-else
-  echo -e "\033[1m$HOME/.zshrc\033[0m already exists. Please remove it and bootstrap again."
+  echo -e "\033[1m$HOME/.profile\033[0m already exists. Please remove it and bootstrap again."
 fi
 
 echo ""
