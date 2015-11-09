@@ -61,6 +61,7 @@ export ZSH=/Users/johnkacz/.oh-my-zsh
 # The ZSH theme to use
 ZSH_THEME="agnoster"
 
+# TODO - decide which plugins you want
 # The plugins to use in the zsh shell
 # plugins=(atom git gradle mvn npm bower brew)
 
