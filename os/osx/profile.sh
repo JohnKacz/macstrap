@@ -29,9 +29,9 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 # Lunchy tab completion
-LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
-if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
-  . $LUNCHY_DIR/lunchy-completion.zsh
+LUNCHY_DIR=$(dirname `gem which lunchy` | sed -e "s/lib/extras/")
+if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then
+  . $LUNCHY_DIR/lunchy-completion.bash
 fi
 
 ###########
