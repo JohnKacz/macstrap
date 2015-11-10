@@ -28,24 +28,18 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-# Lunchy tab completion
-LUNCHY_DIR=$(dirname `gem which lunchy` | sed -e "s/lib/extras/")
-if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then
-  . $LUNCHY_DIR/lunchy-completion.bash
-fi
-
 ###########
 # Aliases #
 ###########
 
 # Color ls
-# alias ls='pwd; ls --color=auto -ahF'
+alias ls='pwd; ls --color=auto -ahF'
 
 # Display as a list
-# alias ll='pwd; ls -1ah'
+alias ll='pwd; ls -1ah'
 
 # Display the insides of a particular directory
-# alias lv='pwd; ls -R'
+alias lv='pwd; ls -R'
 
 alias work='cd ~/code/work/;pwd;ls;'
 
