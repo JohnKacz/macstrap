@@ -28,8 +28,8 @@ main() {
         exit
         ;;
       reload )
-        echo "Reloading the $HOME/.bash_profile ..."
-        source "$HOME/.bash_profile"
+        echo "Reloading the $HOME/.profile ..."
+        source "$HOME/.profile"
         exit
         ;;
       boot )
