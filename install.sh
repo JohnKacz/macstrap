@@ -46,7 +46,7 @@ else
   echo "Overwrite macstrap.cfg? (y/n)"
   read -r response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    sudo cp -rn "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
+    sudo cp -r "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
     echo -e "\t- Recopied the macstrap configuration to \033[1m$conf/macstrap.cfg\033[0m"
   fi
 fi
@@ -59,7 +59,7 @@ else
   echo "Overwrite macstrap themes? (y/n)"
   read -r response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    sudo cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
+    sudo cp -r "$lib/macstrap/conf/themes/" "$conf/themes/"
     echo -e "\t- Recopied the macstrap themes to \033[1m$conf/themes\033[0m"
   fi
 fi
@@ -71,7 +71,7 @@ else
   echo "Overwrite mackup.cfg? (y/n)"
   read -r response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    sudo cp -rn "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
+    sudo cp -r "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
     echo -e "\t- Recopied the mackup configuration to \033[1m$HOME/.mackup.cfg\033[0m"
   fi
 fi
@@ -83,7 +83,7 @@ else
   echo "Overwrite additional mackup configurations? (y/n)"
   read -r response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    sudo cp -rn "$lib/macstrap/conf/.mackup" $confMackup
+    sudo cp -r "$lib/macstrap/conf/.mackup" $confMackup
     echo -e "\t- Recopied the additional mackup configurations to \033[1m${confMackup}}\033[0m"
   fi
 fi
