@@ -41,19 +41,51 @@ if [ ! -e "$conf/macstrap.cfg" ]; then
   sudo mkdir -p $conf
   sudo cp -rn "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
   echo -e "\t- Copied the skeleton macstrap configuration to \033[1m$conf/macstrap.cfg\033[0m"
+else
+  echo ""
+  echo "Overwrite macstrap.cfg? (y/n)"
+  read -r response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    sudo cp -rn "$lib/macstrap/conf/macstrap.cfg" "$conf/macstrap.cfg"
+    echo -e "\t- Recopied the macstrap configuration to \033[1m$conf/macstrap.cfg\033[0m"
+  fi
 fi
 if [ ! -e "$conf/themes" ]; then
   sudo mkdir -p "$conf/themes"
   sudo cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
   echo -e "\t- Copied the skeleton macstrap themes to \033[1m$conf/themes\033[0m"
+else
+  echo ""
+  echo "Overwrite macstrap themes? (y/n)"
+  read -r response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    sudo cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
+    echo -e "\t- Recopied the macstrap themes to \033[1m$conf/themes\033[0m"
+  fi
 fi
 if [ ! -e "$HOME/.mackup.cfg" ]; then
   sudo cp -rn "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
   echo -e "\t- Copied the skeleton mackup configuration to \033[1m$HOME/.mackup.cfg\033[0m"
+else
+  echo ""
+  echo "Overwrite mackup.cfg? (y/n)"
+  read -r response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    sudo cp -rn "$lib/macstrap/conf/.mackup.cfg" "$HOME/.mackup.cfg"
+    echo -e "\t- Recopied the mackup configuration to \033[1m$HOME/.mackup.cfg\033[0m"
+  fi
 fi
 if [ ! -d "$HOME/.mackup" ]; then
   sudo cp -rn "$lib/macstrap/conf/.mackup" $confMackup
   echo -e "\t- Copied the additional mackup configurations to \033[1m${confMackup}}\033[0m"
+else
+  echo ""
+  echo "Overwrite additional mackup configurations? (y/n)"
+  read -r response
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    sudo cp -rn "$lib/macstrap/conf/.mackup" $confMackup
+    echo -e "\t- Recopied the additional mackup configurations to \033[1m${confMackup}}\033[0m"
+  fi
 fi
 
 # if macstrap was installed with the base installation, then delete the extracted /tmp/macstrap folder again
@@ -77,14 +109,20 @@ else
 fi
 
 # Install homebrew cask
-echo "Installing homebrew cask ..."
-brew install caskroom/cask/brew-cask
+if test ! $(which brew); then
+  echo "Installing homebrew cask ..."
+  brew install caskroom/cask/brew-cask
+fi
 
 # Tap alternative versions
-brew tap caskroom/versions
+if test ! $(brew tap | grep caskroom/versions); then
+  brew tap caskroom/versions
+fi
 
 # Tap the fonts
-brew tap caskroom/fonts
+if test ! $(brew tap | grep caskroom/fonts); then
+  brew tap caskroom/fonts
+fi
 
 # Install mackup
 if test ! $(which mackup); then
