@@ -10,7 +10,7 @@ if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 export PATH=/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 
 # Put brew's ruby in front
-export PATH=/usr/local/opt/ruby/bin:$PATH
+# export PATH=/usr/local/opt/ruby/bin:$PATH
 
 # Use gnu tools instead
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
