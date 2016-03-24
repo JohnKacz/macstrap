@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -eu
 
-# Update homebrew and homebrew cask
+# Update homebrew
 brew update
-brew upgrade brew-cask || true
 
 # Load the apps/casks/atom packages from the config file
 source $config

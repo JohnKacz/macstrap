@@ -108,12 +108,6 @@ else
   brew update
 fi
 
-# Install homebrew cask
-if test ! $(which brew); then
-  echo "Installing homebrew cask ..."
-  brew install caskroom/cask/brew-cask
-fi
-
 # Tap alternative versions
 if test ! $(brew tap | grep caskroom/versions); then
   brew tap caskroom/versions

@@ -5,10 +5,9 @@ set -eu
 echo "Updating the OS X app store applications ..."
 softwareupdate -ia
 
-# update brew and cask packages
-echo "Updating the apps and binaries ..."
-brew update 
-brew upgrade brew-cask || true
+# update brew and installed binaries
+echo "Updating the binaries ..."
+brew update
 brew upgrade
 
 # update oh-my-zsh
