@@ -12,10 +12,12 @@ echo ""
 echo -e "Installing apps ..."
 brew cask install ${apps[@]}
 
+# TODO: This won't currently work with 2FA
 # Install apps from Mac App Store with mas
-echo ""
-echo -e "Installing apps from Mac App Store ..."
-mas install ${mas[@]}
+# echo ""
+# echo -e "Installing apps from Mac App Store ..."
+# mas signin $MAS_USER $MAS_PASS
+# mas install ${mas[@]}
 
 # Install atom packages
 # echo ""
