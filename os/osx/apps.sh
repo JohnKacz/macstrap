@@ -12,6 +12,11 @@ echo ""
 echo -e "Installing apps ..."
 brew cask install ${apps[@]}
 
+# Install apps from Mac App Store with mas
+echo ""
+echo -e "Installing apps from Mac App Store ..."
+mas install ${mas[@]}
+
 # Install atom packages
 # echo ""
 # echo "Installing atom packages ..."
