@@ -5,7 +5,11 @@ source version.sh
 # Echo banner
 source banner.sh
 
-echo -e "Installing macstrap ..."
+echo
+echo -e "####################################"
+echo -e "# Installing/updating macstrap ... #"
+echo -e "####################################"
+echo
 
 # Set the paths
 dirname=$(pwd)
@@ -14,7 +18,17 @@ bin="/usr/local/bin"
 conf="$HOME/.macstrap"
 confMackup="$HOME/.mackup"
 
+# Install the XCode command line tools first as GIT is needed by homebrew
+  echo -e "\t- First we need to install XCode command line tools. Please press the install button on the dialog ..."
+  xcode-select --install > /dev/null 2>&1 || true
+  echo
+  echo -e "\t\t- Press any key when the installation has completed."
+  read -e
+
 # Create directories in case they aren't already there
+echo -e "We need sudo rights to change the owner of the \033[1m/usr/local\033[0m folder to \033[1m$(whoami):admin\033[0m to create the \033[1m$lib\033[0m and \033[1m$bin\033[0m directories."
+echo
+sudo chown -R $(whoami):admin /usr/local
 sudo mkdir -p $lib
 sudo mkdir -p $bin
 
@@ -52,7 +66,7 @@ else
 fi
 if [ ! -e "$conf/themes" ]; then
   sudo mkdir -p "$conf/themes"
-  sudo cp -rn "$lib/macstrap/conf/themes/" "$conf/themes/"
+  sudo cp -rn "$lib/macstrap/conf/themes" "$conf/"
   echo -e "\t- Copied the skeleton macstrap themes to \033[1m$conf/themes\033[0m"
 else
   echo ""
@@ -84,17 +98,18 @@ else
   read -r response
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
     sudo cp -r "$lib/macstrap/conf/.mackup" $confMackup
-    echo -e "\t- Recopied the additional mackup configurations to \033[1m${confMackup}}\033[0m"
+    echo -e "\t- Recopied the additional mackup configurations to \033[1m${confMackup}\033[0m"
   fi
 fi
 
 # if macstrap was installed with the base installation, then delete the extracted /tmp/macstrap folder again
 if [ -e "/tmp/macstrap" ]; then
+  cd ~/
   sudo rm -rf "/tmp/macstrap"
 fi
 
 echo -e "\t- Removed installation files"
-echo -e "Finished installing macstrap. Checking if homebrew, cask and mackup are installed and up to date ..."
+echo -e "\t- Checking if homebrew, cask and mackup are installed and up to date ..."
 echo
 
 cd ~/
@@ -108,15 +123,16 @@ else
   brew update
 fi
 
+echo "Installing homebrew cask services, versions and fonts..."
+
+# Tap the services
+brew tap homebrew/services
+
 # Tap alternative versions
-if test ! $(brew tap | grep caskroom/versions); then
-  brew tap caskroom/versions
-fi
+brew tap caskroom/versions
 
 # Tap the fonts
-if test ! $(brew tap | grep caskroom/fonts); then
-  brew tap caskroom/fonts
-fi
+brew tap caskroom/fonts
 
 # Install mackup
 if test ! $(which mackup); then
@@ -125,7 +141,7 @@ if test ! $(which mackup); then
 
   # prompt for the option to continue
   echo
-  echo -e "\033[1mPlease select how to continue\033[0m (you can always backup the app configurations afterwards with macstrap):"
+  echo -e "\033[1mPlease select how to continue\033[0m (you can always backup the app configurations afterwards with 'macstrap backup'):"
   echo -e "[1] Back up the app configurations now"
   echo -e "[2] Do a dry run of the app configurations backup"
   echo -e "[3] Finish the installation of macstrap without backing up the app configurations"
@@ -153,9 +169,9 @@ if test ! $(which mackup); then
 fi
 
 echo
-echo -e "\033[1;34m###########################################"
-echo -e "\033[1;34m# macstrap \033[0;33mv $version\033[1;34m successfully installed #"
-echo -e "\033[1;34m###########################################\033[0m"
+echo -e "\033[1;34m##########################################"
+echo -e "\033[1;34m# macstrap \033[0;33mv$version\033[1;34m successfully installed #"
+echo -e "\033[1;34m##########################################\033[0m"
 echo
-echo -e "Next steps: If you want to install additional binaries or apps to the default"
-echo -e "ones, then please have a look at the \033[1m${conf}/macstrap.cfg\033[0m file how to add these."
+echo -e "Next steps: Please have a look at the \033[1m${conf}/macstrap.cfg\033[0m configuration"
+echo -e "file on how to configure macstrap."

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -eu
-source /usr/local/lib/macstrap/version.sh
 
 # macstrap main
 main() {
@@ -10,6 +9,8 @@ main() {
   export lib="$dirname/lib"
   export os="$dirname/os"
   export config="$HOME/.macstrap/macstrap.cfg"
+
+  source "$dirname/version.sh"
 
   if [ $# -eq 0 ]; then
     # if no argument is present show the usage
@@ -27,18 +28,12 @@ main() {
         usage
         exit
         ;;
-      reload )
-        echo "Reloading the $HOME/.profile ..."
-        source "$HOME/.profile"
-        exit
-        ;;
       boot )
-        echo "Bootstrapping OS X ..."
         sh "$os/osx/index.sh"
         exit
         ;;
       update )
-        update
+        sh "$os/osx/update.sh"
         exit
         ;;
       "upgrade" )
@@ -63,7 +58,7 @@ main() {
 
 # usage info
 usage() {
-  source /usr/local/lib/macstrap/banner.sh
+  source "$dirname/banner.sh"
 
   cat <<EOF
 
@@ -76,7 +71,6 @@ usage() {
 
   Commands:
 
-    reload                  Reload the .bash_profile
     boot                    Bootstrap OS X and install all configured apps, binaries etc.
     update                  Update all apps, binaries etc. and all OS X app store applications
     upgrade                 Update macstrap to the latest version
@@ -86,12 +80,6 @@ usage() {
 EOF
 }
 
-# update OS X or macstrap
-update() {
-  echo "Updating all apps, binaries etc. and the OS X app store applications ..."
-  sh "$os/osx/update.sh"
-}
-
 # update macstrap via git
 upgrade() {
   # TODO - Don't update macstrap if version is current
@@ -99,8 +87,8 @@ upgrade() {
   mkdir -p /tmp/macstrap \
     && cd /tmp/macstrap \
     && curl -L https://github.com/johnkacz/macstrap/archive/master.tar.gz | tar zx --strip 1 \
-    && ./install.sh \
-    && echo "Updated macstrap to $(macstrap --version)" \
+    && sh ./install.sh \
+    && echo "Updated macstrap from version $version to $(macstrap --version)" \
     && cd ~/
   exit
 }

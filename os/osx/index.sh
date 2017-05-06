@@ -1,34 +1,27 @@
 #!/usr/bin/env bash
-set -eu
+set -e
 
-# modules
-source "$lib/symlink/index.sh"
-source "$lib/is-osx/index.sh"
-
-# Only run if on a Mac
-if [[ 0 -eq `osx` ]]; then
-  exit 0
-fi
-
-# exit 1
-# paths
 osx="$os/osx"
 
+echo -e "############################"
+echo -e "# Bootstrapping system ... #"
+echo -e "############################"
+
 # Run each program
-echo ""
-echo "Would you like to set some system defaults? (y/n)"
+echo
+echo -e "Would you like to set some system defaults? (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sh "$osx/defaults.sh"
 fi
-echo ""
-echo "Would you like to install default binaries, npm packages and ruby gems? (y/n)"
+echo
+echo -e "Would you like to install default binaries, npm packages and ruby gems? (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sh "$osx/binaries.sh"
 fi
-echo ""
-echo "Would you like to install default applications? (y/n)"
+echo
+echo -e "Would you like to install default applications? (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sh "$osx/apps.sh"
@@ -43,5 +36,5 @@ else
   echo -e "\033[1m$HOME/.profile\033[0m already exists. Please remove it and bootstrap again."
 fi
 
-echo ""
-echo "All done. Enjoy your new setup."
+echo
+echo -e "All done. Enjoy your new setup."

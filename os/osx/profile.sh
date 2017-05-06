@@ -1,16 +1,30 @@
+###########################
+# Oh-my-zsh configuration #
+###########################
+
+# Path to your oh-my-zsh installation.
+export ZSH=~/.oh-my-zsh
+
+# The ZSH theme to use
+ZSH_THEME="agnoster"
+# ZSH_THEME="bullet-train"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+plugins=(brew bundler docker gem git hacker-quotes rails rbenv ruby sublime)
+
+# Load the oh-my-zsh configuraiton file
+source $ZSH/oh-my-zsh.sh
+
 #########################
 # General configuration #
 #########################
-
-### MOTD Script ### 
-# Doing this first so I can read the motd while everything else gets loaded
-if [[ -e $HOME/.motd ]]; then cat $HOME/.motd; fi
 
 # Export PATH
 export PATH=/usr/local/bin:$HOME/bin:/usr/local/sbin:/usr/local/share/npm/bin:$PATH
 
 # Put brew's ruby in front
-# export PATH=/usr/local/opt/ruby/bin:$PATH
+#export PATH=/usr/local/opt/ruby/bin:$PATH
 
 # Use gnu tools instead
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
@@ -19,47 +33,48 @@ export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 export RBENV_ROOT=/usr/local/var/rbenv
 eval "$(rbenv init -)"
 eval "$(pyenv init -)"
+eval "$(nodenv init -)"
 
 # Use Sublime Text as default editor
-EDITOR="subl"
+export EDITOR="subl"
+
+# Stop Homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
 
 # Add bash completion (for git and others)
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
+# Lunchy tab completion
+LUNCHY_DIR=$(dirname `gem which lunchy` | sed -e "s/lib$/extras/")
+if [ -f $LUNCHY_DIR/lunchy-completion.zsh ]; then
+  . $LUNCHY_DIR/lunchy-completion.zsh
+fi
+
+# alias psql=/usr/local/opt/postgresql/bin/psql
+
+# Setup thefuck
+eval "$(thefuck --alias fix)"
+
 ###########
 # Aliases #
 ###########
 
+# Display all the dotfiles of a particular directory
+alias ldot='ls -ld .*'
+
 # Color ls
-alias ls='pwd; ls --color=auto -ahF'
+alias la='pwd; ls -ahGF'
 
 # Display as a list
 alias ll='pwd; ls -1ah'
 
-# Display the insides of a particular directory
+# Display the insides of a particular director
 alias lv='pwd; ls -R'
 
-alias work='cd ~/code/work/;pwd;ls;'
+###########
 
-# alias psql=/usr/local/opt/postgresql/bin/psql
+ansiweather
 
-###########################
-# Oh-my-zsh configuration #
-###########################
-
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/johnkacz/.oh-my-zsh
-
-# The ZSH theme to use
-ZSH_THEME="agnoster"
-
-# TODO - decide which plugins you want
-# The plugins to use in the zsh shell
-# plugins=(atom git gradle mvn npm bower brew)
-
-# Load the oh-my-zsh configuraiton file
-source $ZSH/oh-my-zsh.sh
-
-eval "$(docker-machine env dev)"
+# eval "$(docker-machine env dev)"
