@@ -4,10 +4,6 @@ set -e
 # Update homebrew
 brew update
 
-# Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
-
 # Load the binaries and the global NPM packages from the config file
 source $config
 
