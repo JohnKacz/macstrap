@@ -83,7 +83,7 @@ echo -e "\t- Disabling press-and-hold for special keys in favor of a key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo -e "\t- Setting a blazingly fast keyboard repeat rate (ain't nobody got time fo special chars while coding!)"
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # echo -e "\t- Disabling auto-correct"
 # defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false

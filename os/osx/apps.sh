@@ -46,13 +46,13 @@ else
   echo -e "\t- mas not installed. Skipping Mac App Store apps installation"
 fi
 
-# Install atom packages
-if [ ${#atomPackages} -gt 0 ]; then
-    echo -e "\t- Installing atom packages ..."
-    apm install ${atomPackages[@]}
-else
-    echo -e "\t- No atom packages defined in macstrap configuration."
-fi
+# # Install atom packages
+# if [ ${#atomPackages} -gt 0 ]; then
+#     echo -e "\t- Installing atom packages ..."
+#     apm install ${atomPackages[@]}
+# else
+#     echo -e "\t- No atom packages defined in macstrap configuration."
+# fi
 
 # Remove outdated versions from the cellar
 echo

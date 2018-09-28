@@ -27,14 +27,14 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sh "$osx/apps.sh"
 fi
 
-# Symlink the .bash_profile configuration file
-if [[ ! -e "$HOME/.profile" ]]; then
-  ln -s "$osx/profile.sh" "$HOME/.profile"
-  echo -e "Symlinked \033[1m$osx/profile.sh\033[0m => \033[1m$HOME/.profile\033[0m"
-  source $HOME/.profile
-else
-  echo -e "\033[1m$HOME/.profile\033[0m already exists. Please remove it and bootstrap again."
-fi
+# # Symlink the .bash_profile configuration file
+# if [[ ! -e "$HOME/.profile" ]]; then
+#   ln -s "$osx/profile.sh" "$HOME/.profile"
+#   echo -e "Symlinked \033[1m$osx/profile.sh\033[0m => \033[1m$HOME/.profile\033[0m"
+#   source $HOME/.profile
+# else
+#   echo -e "\033[1m$HOME/.profile\033[0m already exists. Please remove it and bootstrap again."
+# fi
 
 echo
 echo -e "All done. Enjoy your new setup."
